@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { useTransition } from "react";
+import { useTransition } from 'react'
 
 import {
   AlertDialog,
@@ -12,13 +12,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { deleteImage } from "@/lib/actions/image.actions";
+} from '@/components/ui/alert-dialog'
+import { deleteImage } from '@/lib/actions/image.actions'
 
-import { Button } from "../ui/button";
+import { Button } from '../ui/button'
 
 export const DeleteConfirmation = ({ imageId }: { imageId: string }) => {
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition()
 
   return (
     <AlertDialog>
@@ -48,14 +48,14 @@ export const DeleteConfirmation = ({ imageId }: { imageId: string }) => {
             className="border bg-red-500 text-white hover:bg-red-600"
             onClick={() =>
               startTransition(async () => {
-                await deleteImage(imageId);
+                await deleteImage(imageId)
               })
             }
           >
-            {isPending ? "Deleting..." : "Delete"}
+            {isPending ? 'Deleting...' : 'Delete'}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
-};
+  )
+}

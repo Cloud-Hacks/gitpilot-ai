@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
+import { loadStripe } from '@stripe/stripe-js'
+import { useEffect } from 'react'
 
-import { useToast } from "@/components/ui/use-toast";
-import { checkoutCredits } from "@/lib/actions/transaction.action";
+import { useToast } from '@/components/ui/use-toast'
+import { checkoutCredits } from '@/lib/actions/transaction.action'
 
-import { Button } from "../ui/button";
+import { Button } from '../ui/button'
 
 const Checkout = ({
   plan,
@@ -14,38 +14,38 @@ const Checkout = ({
   credits,
   buyerId,
 }: {
-  plan: string;
-  amount: number;
-  credits: number;
-  buyerId: string;
+  plan: string
+  amount: number
+  credits: number
+  buyerId: string
 }) => {
-  const { toast } = useToast();
+  const { toast } = useToast()
 
   useEffect(() => {
-    loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-  }, []);
+    loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+  }, [])
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
+    const query = new URLSearchParams(window.location.search)
+    if (query.get('success')) {
       toast({
-        title: "Order placed!",
-        description: "You will receive an email confirmation",
+        title: 'Order placed!',
+        description: 'You will receive an email confirmation',
         duration: 5000,
-        className: "success-toast",
-      });
+        className: 'success-toast',
+      })
     }
 
-    if (query.get("canceled")) {
+    if (query.get('canceled')) {
       toast({
-        title: "Order canceled!",
+        title: 'Order canceled!',
         description: "Continue to shop around and checkout when you're ready",
         duration: 5000,
-        className: "error-toast",
-      });
+        className: 'error-toast',
+      })
     }
-  }, []);
+  }, [])
 
   const onCheckout = async () => {
     const transaction = {
@@ -53,10 +53,10 @@ const Checkout = ({
       amount,
       credits,
       buyerId,
-    };
+    }
 
-    await checkoutCredits(transaction);
-  };
+    await checkoutCredits(transaction)
+  }
 
   return (
     <form action={onCheckout} method="POST">
@@ -70,7 +70,7 @@ const Checkout = ({
         </Button>
       </section>
     </form>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout

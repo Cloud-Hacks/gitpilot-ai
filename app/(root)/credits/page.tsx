@@ -1,19 +1,20 @@
-import { SignedIn, auth } from "@clerk/nextjs";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+import { auth } from '@clerk/nextjs/server'
+import { SignedIn } from '@clerk/nextjs'
+import Image from 'next/image'
+import { redirect } from 'next/navigation'
 
-import Header from "@/components/shared/Header";
-import { Button } from "@/components/ui/button";
-import { plans } from "@/constants";
-import { getUserById } from "@/lib/actions/user.actions";
-import Checkout from "@/components/shared/Checkout";
+import Header from '@/components/shared/Header'
+import { Button } from '@/components/ui/button'
+import { plans } from '@/constants'
+import { getUserById } from '@/lib/actions/user.actions'
+import Checkout from '@/components/shared/Checkout'
 
 const Credits = async () => {
-  const { userId } = auth();
+  const { userId } = auth()
 
-  if (!userId) redirect("/sign-in");
+  if (!userId) redirect('/sign-in')
 
-  const user = await getUserById(userId);
+  const user = await getUserById(userId)
 
   return (
     <>
@@ -44,7 +45,7 @@ const Credits = async () => {
                   >
                     <Image
                       src={`/assets/icons/${
-                        inclusion.isIncluded ? "check.svg" : "cross.svg"
+                        inclusion.isIncluded ? 'check.svg' : 'cross.svg'
                       }`}
                       alt="check"
                       width={24}
@@ -55,7 +56,7 @@ const Credits = async () => {
                 ))}
               </ul>
 
-              {plan.name === "Free" ? (
+              {plan.name === 'Free' ? (
                 <Button variant="outline" className="credits-btn">
                   Free Consumable
                 </Button>
@@ -74,7 +75,7 @@ const Credits = async () => {
         </ul>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Credits;
+export default Credits
